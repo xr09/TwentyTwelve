@@ -1,0 +1,57 @@
+
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<div id="main" class="wrapper">
+  <div id="primary" class="site-content">
+    <div id="content" role="main">
+
+{% if articles %}
+  {% for article in (articles_page.object_list if articles_page else articles) %}
+    <article class="post type-post status-publish format-standard">
+      <header class=entry-header>
+          <h1 class=entry-title><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></h1>
+          <div class=entry-content><p> {{ article.summary }}</p></div>
+      </header>
+      	<footer class="entry-meta">
+			This entry was posted in <a href="{{ SITEURL }}/{{ article.category.url }}" title="View all posts in {{ article.category }}" rel="category">{{ article.category }}</a> and tagged {% for tag in article.tags %} #<a href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a>{% endfor %} on {{ article.date.strftime("%b %e,  %G") }} 
+			
+			  by <span class="author vcard">
+			    <a href="{{ SITEURL }}/{{ article.author.url }}" title="View all posts by {{ article.author}}" rel="author">
+			      {{ article.author}}
+			    </a>
+			   </span>.
+	</footer><!-- .entry-meta -->
+    </article>
+  {% endfor %}
+{%endif%}
+
+{% if articles_page and articles_paginator.num_pages > 1 %}
+<div class="pagination">
+<ul>
+  {% if articles_page.has_previous() %}
+    {% set num = articles_page.previous_page_number() %}
+    <a href="{{ SITEURL }}/{{ page_name }}{{ num if num > 1 else '' }}.html">&larr; Previous</a>
+  {% else %}
+    <span class="prev disabled"><a href="#">&larr; Previous</a>
+  {% endif %}
+  {% for num in range( 1, 1 + articles_paginator.num_pages ) %}
+    <span class="{{ 'active' if num == articles_page.number else '' }}"><a href="{{ SITEURL }}/{{ page_name }}{{ num if num > 1 else '' }}.html">{{ num }}</a>
+  {% endfor %}
+  {% if articles_page.has_next() %}
+    <span class="next"><a href="{{ SITEURL }}/{{ page_name }}{{ articles_page.next_page_number() }}.html">Next &rarr;</a>
+  {% else %}
+    <span class="next disabled"><a href="#">&rarr; Next</a>
+  {% endif %}
+</ul>
+</div>
+{% endif %}
+  
+    </div><!-- #content -->
+  </div><!-- #primary -->
+  
+</div> <!-- #main -->
+
+{% endblock %}

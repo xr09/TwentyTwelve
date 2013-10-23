@@ -1,0 +1,20 @@
+<header id="masthead" class="site-header" role="banner">
+  <hgroup>
+    <h1 class="site-title"><a href="{{ SITEURL }}/" title="{{SITENAME}}" rel="home">{{SITENAME}}</a></h1>
+    <h2 class="site-description">{{SITESUBTITLE}}</h2>
+  </hgroup>
+
+<nav id="site-navigation" class="main-navigation" role="navigation">
+  <h3 class="menu-toggle">menu</h3>
+  <a class="assistive-text" href="#content" title="skip to content">skip to content</a>
+  <div class="nav-menu">
+  <ul>
+      {% for section in SECTIONS %}
+          <li><a href="{{ SITEURL }}/{{ section[1]}}">{{ section[0] }}</a> </li>
+      {% endfor %}
+  </ul>
+  </div>
+</nav>
+</header>
+
+<div class=separator></div>
