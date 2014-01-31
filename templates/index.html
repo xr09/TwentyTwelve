@@ -10,7 +10,7 @@
 
 {% if articles %}
   {% for article in (articles_page.object_list if articles_page else articles) %}
-    <article class="post type-post status-publish format-standard">
+    <article class="post">
       <header class=entry-header>
           <h1 class=entry-title><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></h1>
           <div class=entry-content><p> {{ article.summary }}</p></div>

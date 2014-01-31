@@ -848,15 +848,13 @@ article.sticky .featured-post {
 .comment-content blockquote p:last-child {
 	margin-bottom: 0;
 }
-.entry-content code,
-.comment-content code {
+code {
 	font-family: Consolas, Monaco, Lucida Console, monospace;
 	font-size: 12px;
 	font-size: 0.857142857rem;
 	line-height: 2;
 }
-.entry-content pre,
-.comment-content pre {
+pre {
 	border: 1px solid #ededed;
 	color: #666;
 	font-family: Consolas, Monaco, Lucida Console, monospace;
@@ -869,8 +867,7 @@ article.sticky .featured-post {
 	padding: 24px;
 	padding: 1.714285714rem;
 }
-.entry-content pre code,
-.comment-content pre code {
+pre code {
 	display: block;
 }
 .entry-content abbr,
@@ -1386,24 +1383,7 @@ a.comment-edit-link:hover {
 	margin-left: 12px;
 	margin-left: 0.857142857rem;
 }
-#wp-calendar {
-	margin: 0;
-	width: 100%;
-	font-size: 13px;
-	font-size: 0.928571429rem;
-	line-height: 1.846153846;
-	color: #686868;
-}
-#wp-calendar th,
-#wp-calendar td,
-#wp-calendar caption {
-	text-align: left;
-}
-#wp-calendar #next {
-	padding-right: 24px;
-	padding-right: 1.714285714rem;
-	text-align: right;
-}
+
 .widget_search label {
 	display: block;
 	font-size: 13px;
