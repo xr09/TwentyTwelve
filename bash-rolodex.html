@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title> Bash Rolodex | DevPad </title>
+
+    <link rel="stylesheet" href="http://xr09.github.io/TwentyTwelve/theme/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="http://xr09.github.io/TwentyTwelve/theme/css/pygments.css" type="text/css" />
+    <link rel="alternate" type="application/rss+xml" title="DevPad" href="http://xr09.github.io/TwentyTwelve/feeds/all.rss.xml">
+  </head>
+  <body class="home blog custom-font-enabled single-author">
+    <div id="page" class="hfeed site">
+<header id="masthead" class="site-header" role="banner">
+  <hgroup>
+    <h1 class="site-title"><a href="http://xr09.github.io/TwentyTwelve/" title="DevPad" rel="home">DevPad</a></h1>
+    <h2 class="site-description">clean code, good karma</h2>
+  </hgroup>
+
+<nav id="site-navigation" class="main-navigation" role="navigation">
+  <h3 class="menu-toggle">menu</h3>
+  <a class="assistive-text" href="#content" title="skip to content">skip to content</a>
+  <div class="nav-menu">
+  <ul>
+          <li><a href="http://xr09.github.io/TwentyTwelve/pages/projects.html">Projects</a> </li>
+          <li><a href="http://xr09.github.io/TwentyTwelve/archives.html">Archive</a> </li>
+          <li><a href="http://xr09.github.io/TwentyTwelve/tags.html">Tags</a> </li>
+          <li><a href="http://xr09.github.io/TwentyTwelve/pages/about.html">About</a> </li>
+  </ul>
+  </div>
+</nav>
+</header>
+
+<div class=separator></div>        
+        <div class=body>
+<div id="main" class="wrapper">
+<article class="post entry-content">
+  <header class="entry-header">
+    <h1 class="entry-title"> Bash Rolodex</h1>
+    <p class=date> Fri 04 October 2013 </p>
+  </header>
+    
+    <p>There's been a while since I have a <em>rolodex.txt</em> in my <em>ideas_for_projects</em>
+directory, although there are <a class="reference external" href="https://www.google.com/search?q=rolodex+programs">several</a> options out there, <a class="reference external" href="http://en.wikipedia.org/wiki/Rolodex">this</a> is the
+kind of program nobody resists to reimplement, so here I go.</p>
+<p>My first idea was a PyQt UI with a SQlite db, simple, fast and pragmatic,
+some UX mojo and the magic is done. But never had the time to start it,
+damn, lately I have no time to start anything at all, and that's a pity
+because I love starting things (almost as much as releasing those things).</p>
+<p>So the situation gets worst, I needed something quick and simple to manage
+all my phone numbers and no time for boilerplate code, just <em>the thing</em>.</p>
+<p>Well in the last year I've been immersed reading lots of bash code at work,
+made a couple of <a class="reference external" href="https://github.com/xr09/kaos">new</a> bash <a class="reference external" href="https://github.com/xr09/rainbow.sh">projects</a> myself and I'm really enjoying its
+pragmatism, is just plain talk with the system, so lets make a rolodex with bash.</p>
+<div class="section" id="the-thing">
+<h2>The Thing</h2>
+<p>First, this rolodex uses a text file with all the info using one line
+per contact. Like this:</p>
+<div class="highlight"><pre>dave number
+john number1 number2
+ana number
+</pre></div>
+<p>The file will be in: <em>~/.my_contacts</em></p>
+<p>Then all we need is a way to add new contacts to that file and search them later.</p>
+<p>Easy cake with Bash, just put these two functions on <em>~/.bashrc</em> and we're done.</p>
+<div class="highlight"><pre>addnumber<span class="o">(){</span>
+  <span class="nb">echo</span> <span class="s2">&quot;$@&quot;</span> &gt;&gt; ~/.my_contacts
+<span class="o">}</span>
+
+number<span class="o">(){</span>
+  grep -i <span class="nv">$1</span> ~/.my_contacts
+<span class="o">}</span>
+</pre></div>
+<p>So the workflow for using this rolodex would be:</p>
+<div class="highlight"><pre><span class="nv">$ </span>addnumber moss the nerd 45645456
+<span class="nv">$ </span>addnumber jennifer public relations 98989898
+<span class="nv">$ </span>addnumber roy the mad irish 12121212
+<span class="nv">$ </span>number jen
+<span class="nv">$ </span>jennifer public relations 98989898
+</pre></div>
+<p>Maybe you want to mess with the contacts, fix bad info, remove some old entry, etc..
+in that case, fire up your editor and go nuts changing everything, is just a
+simple text file.</p>
+<p>No big fancy buttons this time but as I promised you have your rolodex in bash,
+as pragmatic as it gets.</p>
+</div>
+
+    </article>
+    <p class=tags>This entry was tagged as
+      <a href="http://xr09.github.io/TwentyTwelve/tag/rolodex.html">rolodex</a>
+      <a href="http://xr09.github.io/TwentyTwelve/tag/unix.html">unix</a>
+      <a href="http://xr09.github.io/TwentyTwelve/tag/bash.html">bash</a>
+    </p>
+</div> <!--#main-->
+        </div>
+        
+<footer id="colophon" role="contentinfo">
+  <p>&copy; Copyright <script language="JavaScript">var date = new Date(); document.write(date.getFullYear());</script> by 
+    <script language="JavaScript">
+          u = 'dhunterkde';
+          s = 'gmail.com';
+          document.write('<a href=\"mailto:' + u + '@' + s + '\" target=\"_blank\">');
+    </script>
+    Manuel Gutierrez</a></p>
+  <p > Powered by <a href="http://docs.getpelican.com/en/latest/getting_started.html" target="_blank">Pelican</a>.  
+    <a href="https://github.com/xr09/twentytwelve">Theme</a> ported from <a href="http://wordpress.org/themes/twentytwelve">Wordpress</a> by <a href="http://xr09.github.io">xr09</a>
+  </p> 
+</footer>    </div>
+  </body>
+</html>

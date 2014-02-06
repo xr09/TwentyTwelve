@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>DevPad</title><link href="http://xr09.github.io/TwentyTwelve/" rel="alternate"></link><link href="http://xr09.github.io/TwentyTwelve/feeds/server.atom.xml" rel="self"></link><id>http://xr09.github.io/TwentyTwelve/</id><updated>2013-10-30T09:18:00-04:00</updated><entry><title>Serving Static Folder with NGINX</title><link href="http://xr09.github.io/TwentyTwelve/serving-static-folder-with-nginx.html" rel="alternate"></link><updated>2013-10-30T09:18:00-04:00</updated><author><name>Manuel Gutierrez</name></author><id>tag:xr09.github.io/TwentyTwelve,2013-10-30:serving-static-folder-with-nginx.html</id><summary type="html">&lt;p&gt;At work we install Lubuntu workstations very often, we have a custom install script for performance tuning and many others details, the problem is we all don't have the latest script version in our thumb drives (sometimes we change it daily), as I'm already running nginx for my local web development I had the idea of serving a static folder with all our quick'n'dirty scripts to get always the latest and shiniest.&lt;/p&gt;
+&lt;p&gt;So here it is, I need to serve one folder by HTTP, I'll put several files I need to download from time to time from others workstations.&lt;/p&gt;
+&lt;p&gt;Solution:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;mkdir /var/www/static
+chmod a+rw /var/www/static -R
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Create the static folder and give permissions for a normal user to copy there.&lt;/p&gt;
+&lt;p&gt;Then set up nginx to serve it and we're done: &lt;code&gt;vim /etc/nginx/sites/static.conf&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;server&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="kn"&gt;listen&lt;/span&gt;       &lt;span class="mi"&gt;8080&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+      &lt;span class="kn"&gt;location&lt;/span&gt; &lt;span class="s"&gt;/&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="kn"&gt;root&lt;/span&gt;    &lt;span class="s"&gt;/var/www/static/&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="kn"&gt;access_log&lt;/span&gt;   &lt;span class="no"&gt;on&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="kn"&gt;autoindex&lt;/span&gt;  &lt;span class="no"&gt;on&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+      &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now the folder is accessible by &lt;code&gt;http://your_ip_address:8080&lt;/code&gt;, go nuts downloading anything there with wget.&lt;/p&gt;
+&lt;p&gt;As a bonus here is the way of using wget as if were curl:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;wget -q -O - 192.168.1.123:8080/somescript | bash
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;-q is for quiet, -O is to redirect the output and the - is an alias to std-out, this way is a shortcut for downloading &lt;em&gt;somescript&lt;/em&gt; and running it with bash.&lt;/p&gt;
+</summary><category term="nginx"></category><category term="static"></category></entry></feed>

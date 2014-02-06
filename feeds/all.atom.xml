@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>DevPad</title><link href="http://xr09.github.io/TwentyTwelve/" rel="alternate"></link><link href="http://xr09.github.io/TwentyTwelve/feeds/all.atom.xml" rel="self"></link><id>http://xr09.github.io/TwentyTwelve/</id><updated>2014-01-31T14:07:00-05:00</updated><entry><title>Fast Git Clone</title><link href="http://xr09.github.io/TwentyTwelve/fast-git-clone.html" rel="alternate"></link><updated>2014-01-31T14:07:00-05:00</updated><author><name>Manuel Gutierrez</name></author><id>tag:xr09.github.io/TwentyTwelve,2014-01-31:fast-git-clone.html</id><summary type="html">&lt;p&gt;Lots of tutorials nowadays recommend using &lt;cite&gt;git clone&lt;/cite&gt; to get a project's source code, that's fine for little projects but for the big ones is a waste of bandwith, space, and more importantly, of your precious time.&lt;/p&gt;
+&lt;p&gt;Whenever you need to clone a git repo from the internet and you plan to just use the contents and no need for past history, then the good old &lt;cite&gt;git clone&lt;/cite&gt; is a waste of bandwith, that command gets the whole repo history, that is every line change that has been commited since the beginning of development, you just need the latest state of files so let's tweak a little to simulate the &amp;quot;Download ZIP&amp;quot; button on the github page:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;git clone --depth 1 https://github.com/apenwarr/sshuttle.git
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This way you get the latest copy of a project's master branch, no history and minimize usage of network resources. That's fast!&lt;/p&gt;
+&lt;p&gt;From &lt;strong&gt;man git clone&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;--depth &amp;lt;depth&amp;gt;
+      Create a shallow clone with a history truncated to the specified
+      number of revisions. A shallow repository has a number of
+      limitations (you cannot clone or fetch from it, nor push from nor
+      into it), but is adequate if you are only interested in the recent
+      history of a large project with a long history, and would want to
+      send in fixes as patches.
+&lt;/pre&gt;&lt;/div&gt;
+</summary><category term="git"></category></entry><entry><title>New Admin In Town</title><link href="http://xr09.github.io/TwentyTwelve/new-admin-in-town.html" rel="alternate"></link><updated>2014-01-29T12:13:00-05:00</updated><author><name>Manuel Gutierrez</name></author><id>tag:xr09.github.io/TwentyTwelve,2014-01-29:new-admin-in-town.html</id><summary type="html">&lt;p&gt;Two months ago I took a new position at work: network admin, so had to dive deeper into the great world of security, scalability, connectivity, backups... everyday I learn new network concepts or some cool hardware for a specific task, interesting stuff.&lt;/p&gt;
+&lt;p&gt;I'm trying hard to keep up the pace with my personal projects (new ideas to code), but lately bash is more common than python in my &lt;strong&gt;workspace&lt;/strong&gt; folder, ain't no shame in that since bash is mandatory on every admin toolbox.&lt;/p&gt;
+&lt;p&gt;Next topics: rsnapshot, cron, server hardening.&lt;/p&gt;
+</summary><category term="job"></category><category term="admin"></category></entry><entry><title>Serving Static Folder with NGINX</title><link href="http://xr09.github.io/TwentyTwelve/serving-static-folder-with-nginx.html" rel="alternate"></link><updated>2013-10-30T09:18:00-04:00</updated><author><name>Manuel Gutierrez</name></author><id>tag:xr09.github.io/TwentyTwelve,2013-10-30:serving-static-folder-with-nginx.html</id><summary type="html">&lt;p&gt;At work we install Lubuntu workstations very often, we have a custom install script for performance tuning and many others details, the problem is we all don't have the latest script version in our thumb drives (sometimes we change it daily), as I'm already running nginx for my local web development I had the idea of serving a static folder with all our quick'n'dirty scripts to get always the latest and shiniest.&lt;/p&gt;
+&lt;p&gt;So here it is, I need to serve one folder by HTTP, I'll put several files I need to download from time to time from others workstations.&lt;/p&gt;
+&lt;p&gt;Solution:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;mkdir /var/www/static
+chmod a+rw /var/www/static -R
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Create the static folder and give permissions for a normal user to copy there.&lt;/p&gt;
+&lt;p&gt;Then set up nginx to serve it and we're done: &lt;code&gt;vim /etc/nginx/sites/static.conf&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;server&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="kn"&gt;listen&lt;/span&gt;       &lt;span class="mi"&gt;8080&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+      &lt;span class="kn"&gt;location&lt;/span&gt; &lt;span class="s"&gt;/&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="kn"&gt;root&lt;/span&gt;    &lt;span class="s"&gt;/var/www/static/&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="kn"&gt;access_log&lt;/span&gt;   &lt;span class="no"&gt;on&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="kn"&gt;autoindex&lt;/span&gt;  &lt;span class="no"&gt;on&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+      &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now the folder is accessible by &lt;code&gt;http://your_ip_address:8080&lt;/code&gt;, go nuts downloading anything there with wget.&lt;/p&gt;
+&lt;p&gt;As a bonus here is the way of using wget as if were curl:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;wget -q -O - 192.168.1.123:8080/somescript | bash
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;-q is for quiet, -O is to redirect the output and the - is an alias to std-out, this way is a shortcut for downloading &lt;em&gt;somescript&lt;/em&gt; and running it with bash.&lt;/p&gt;
+</summary><category term="nginx"></category><category term="static"></category></entry><entry><title>This is how I roll</title><link href="http://xr09.github.io/TwentyTwelve/this-is-how-i-roll.html" rel="alternate"></link><updated>2013-10-21T13:14:00-04:00</updated><author><name>Manuel Gutierrez</name></author><id>tag:xr09.github.io/TwentyTwelve,2013-10-21:this-is-how-i-roll.html</id><summary type="html">&lt;p&gt;Sometime when faced with hard decisions you could use a little help from life. (&lt;cite&gt;s/life/python/&lt;/cite&gt;).&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;random&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;opt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;yes&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;no&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;maybe&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;random&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;choice&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;opt&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="s"&gt;&amp;#39;yes&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This is how I roll... the dice.&lt;/p&gt;
+</summary><category term="python"></category></entry><entry><title>Bash Rolodex</title><link href="http://xr09.github.io/TwentyTwelve/bash-rolodex.html" rel="alternate"></link><updated>2013-10-04T08:15:00-04:00</updated><author><name>Manuel Gutierrez</name></author><id>tag:xr09.github.io/TwentyTwelve,2013-10-04:bash-rolodex.html</id><summary type="html">&lt;p&gt;There's been a while since I have a &lt;em&gt;rolodex.txt&lt;/em&gt; in my &lt;em&gt;ideas_for_projects&lt;/em&gt;
+directory, although there are &lt;a class="reference external" href="https://www.google.com/search?q=rolodex+programs"&gt;several&lt;/a&gt; options out there, &lt;a class="reference external" href="http://en.wikipedia.org/wiki/Rolodex"&gt;this&lt;/a&gt; is the
+kind of program nobody resists to reimplement, so here I go.&lt;/p&gt;
+&lt;p&gt;My first idea was a PyQt UI with a SQlite db, simple, fast and pragmatic,
+some UX mojo and the magic is done. But never had the time to start it,
+damn, lately I have no time to start anything at all, and that's a pity
+because I love starting things (almost as much as releasing those things).&lt;/p&gt;
+&lt;p&gt;So the situation gets worst, I needed something quick and simple to manage
+all my phone numbers and no time for boilerplate code, just &lt;em&gt;the thing&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Well in the last year I've been immersed reading lots of bash code at work,
+made a couple of &lt;a class="reference external" href="https://github.com/xr09/kaos"&gt;new&lt;/a&gt; bash &lt;a class="reference external" href="https://github.com/xr09/rainbow.sh"&gt;projects&lt;/a&gt; myself and I'm really enjoying its
+pragmatism, is just plain talk with the system, so lets make a rolodex with bash.&lt;/p&gt;
+&lt;div class="section" id="the-thing"&gt;
+&lt;h2&gt;The Thing&lt;/h2&gt;
+&lt;p&gt;First, this rolodex uses a text file with all the info using one line
+per contact. Like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;dave number
+john number1 number2
+ana number
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The file will be in: &lt;em&gt;~/.my_contacts&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Then all we need is a way to add new contacts to that file and search them later.&lt;/p&gt;
+&lt;p&gt;Easy cake with Bash, just put these two functions on &lt;em&gt;~/.bashrc&lt;/em&gt; and we're done.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;addnumber&lt;span class="o"&gt;(){&lt;/span&gt;
+  &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;$@&amp;quot;&lt;/span&gt; &amp;gt;&amp;gt; ~/.my_contacts
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+number&lt;span class="o"&gt;(){&lt;/span&gt;
+  grep -i &lt;span class="nv"&gt;$1&lt;/span&gt; ~/.my_contacts
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;So the workflow for using this rolodex would be:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;addnumber moss the nerd 45645456
+&lt;span class="nv"&gt;$ &lt;/span&gt;addnumber jennifer public relations 98989898
+&lt;span class="nv"&gt;$ &lt;/span&gt;addnumber roy the mad irish 12121212
+&lt;span class="nv"&gt;$ &lt;/span&gt;number jen
+&lt;span class="nv"&gt;$ &lt;/span&gt;jennifer public relations 98989898
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Maybe you want to mess with the contacts, fix bad info, remove some old entry, etc..
+in that case, fire up your editor and go nuts changing everything, is just a
+simple text file.&lt;/p&gt;
+&lt;p&gt;No big fancy buttons this time but as I promised you have your rolodex in bash,
+as pragmatic as it gets.&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="rolodex"></category><category term="unix"></category><category term="bash"></category></entry><entry><title>sed is unix</title><link href="http://xr09.github.io/TwentyTwelve/sed-is-unix.html" rel="alternate"></link><updated>2013-10-03T14:23:00-04:00</updated><author><name>Manuel Gutierrez</name></author><id>tag:xr09.github.io/TwentyTwelve,2013-10-03:sed-is-unix.html</id><summary type="html">&lt;p&gt;The UNIX concept of &amp;quot;do one thing and do it well&amp;quot; is so beautiful it's inspiring.&lt;/p&gt;
+&lt;p&gt;Back in 2005 as a beginner Linux user I used vim for everything text related, now I use it relatively less, I just found sed a while ago.&lt;/p&gt;
+&lt;p&gt;For example, this is how I change my IceWm wallpaper with sed.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;sed -i  &lt;span class="s1"&gt;&amp;#39;/jpg/ s/old_wallpaper/new_wallpaper/&amp;#39;&lt;/span&gt; .icewm/preferences
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;A rather simple task, any visual text editor could do but I find this way extremely simple and pragmatic (and scriptable).&lt;/p&gt;
+&lt;p&gt;Some argue this is a waste of time, the time of text tools is over. Until they have to change a humongous 2GB text file and no editor can handle it, but sed will.&lt;/p&gt;
+&lt;p&gt;Do one thing and do it well. Nice play UNIX.&lt;/p&gt;
+</summary><category term="unix"></category><category term="sed"></category></entry><entry><title>Pelican looks great</title><link href="http://xr09.github.io/TwentyTwelve/pelican-looks-great.html" rel="alternate"></link><updated>2013-10-01T13:13:00-04:00</updated><author><name>Manuel Gutierrez</name></author><id>tag:xr09.github.io/TwentyTwelve,2013-10-01:pelican-looks-great.html</id><summary type="html">&lt;p&gt;Just got my pelican working, awesome, I struggled for a while with dependencies and even wanted to give up and check some alternatives but in the end I got it, loving Pelican so far.&lt;/p&gt;
+&lt;p&gt;For begginers trying to get a Pelican site, you should get acquainted with virtualenv, pip and I'd say virtualenvwrapper too, this is bread and butter on python world nowadays, so go for it right now.&lt;/p&gt;
+&lt;p&gt;Create a virtualenv, install pelican on it, create you blog directory with the respective settings.py, source and output folders inside, then just write your posts on Restructured Text or Markdown as you prefer and compile with a command like:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;pelican blog/ -s settings.py -r
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I was thinking on writing just-another-pelican-tutorial but I'll recommend one of the many I've found, read &lt;a class="reference external" href="http://fjavieralba.com/pelican-a-static-blog-generator-for-pythonistas.html"&gt;this&lt;/a&gt; one and enjoy Pelican.&lt;/p&gt;
+</summary><category term="pelican"></category></entry></feed>

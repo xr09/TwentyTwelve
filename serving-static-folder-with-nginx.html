@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title> Serving Static Folder with NGINX | DevPad </title>
+
+    <link rel="stylesheet" href="http://xr09.github.io/TwentyTwelve/theme/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="http://xr09.github.io/TwentyTwelve/theme/css/pygments.css" type="text/css" />
+    <link rel="alternate" type="application/rss+xml" title="DevPad" href="http://xr09.github.io/TwentyTwelve/feeds/all.rss.xml">
+  </head>
+  <body class="home blog custom-font-enabled single-author">
+    <div id="page" class="hfeed site">
+<header id="masthead" class="site-header" role="banner">
+  <hgroup>
+    <h1 class="site-title"><a href="http://xr09.github.io/TwentyTwelve/" title="DevPad" rel="home">DevPad</a></h1>
+    <h2 class="site-description">clean code, good karma</h2>
+  </hgroup>
+
+<nav id="site-navigation" class="main-navigation" role="navigation">
+  <h3 class="menu-toggle">menu</h3>
+  <a class="assistive-text" href="#content" title="skip to content">skip to content</a>
+  <div class="nav-menu">
+  <ul>
+          <li><a href="http://xr09.github.io/TwentyTwelve/pages/projects.html">Projects</a> </li>
+          <li><a href="http://xr09.github.io/TwentyTwelve/archives.html">Archive</a> </li>
+          <li><a href="http://xr09.github.io/TwentyTwelve/tags.html">Tags</a> </li>
+          <li><a href="http://xr09.github.io/TwentyTwelve/pages/about.html">About</a> </li>
+  </ul>
+  </div>
+</nav>
+</header>
+
+<div class=separator></div>        
+        <div class=body>
+<div id="main" class="wrapper">
+<article class="post entry-content">
+  <header class="entry-header">
+    <h1 class="entry-title"> Serving Static Folder with NGINX</h1>
+    <p class=date> Wed 30 October 2013 </p>
+  </header>
+    
+    <p>At work we install Lubuntu workstations very often, we have a custom install script for performance tuning and many others details, the problem is we all don't have the latest script version in our thumb drives (sometimes we change it daily), as I'm already running nginx for my local web development I had the idea of serving a static folder with all our quick'n'dirty scripts to get always the latest and shiniest.</p>
+<p>So here it is, I need to serve one folder by HTTP, I'll put several files I need to download from time to time from others workstations.</p>
+<p>Solution:</p>
+<div class="highlight"><pre>mkdir /var/www/static
+chmod a+rw /var/www/static -R
+</pre></div>
+<p>Create the static folder and give permissions for a normal user to copy there.</p>
+<p>Then set up nginx to serve it and we're done: <code>vim /etc/nginx/sites/static.conf</code></p>
+<div class="highlight"><pre><span class="k">server</span> <span class="p">{</span>
+    <span class="kn">listen</span>       <span class="mi">8080</span><span class="p">;</span>
+      <span class="kn">location</span> <span class="s">/</span> <span class="p">{</span>
+        <span class="kn">root</span>    <span class="s">/var/www/static/</span><span class="p">;</span>
+        <span class="kn">access_log</span>   <span class="no">on</span><span class="p">;</span>
+        <span class="kn">autoindex</span>  <span class="no">on</span><span class="p">;</span>
+      <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+<p>Now the folder is accessible by <code>http://your_ip_address:8080</code>, go nuts downloading anything there with wget.</p>
+<p>As a bonus here is the way of using wget as if were curl:</p>
+<div class="highlight"><pre>wget -q -O - 192.168.1.123:8080/somescript | bash
+</pre></div>
+<p>-q is for quiet, -O is to redirect the output and the - is an alias to std-out, this way is a shortcut for downloading <em>somescript</em> and running it with bash.</p>
+
+    </article>
+    <p class=tags>This entry was tagged as
+      <a href="http://xr09.github.io/TwentyTwelve/tag/nginx.html">nginx</a>
+      <a href="http://xr09.github.io/TwentyTwelve/tag/static.html">static</a>
+    </p>
+</div> <!--#main-->
+        </div>
+        
+<footer id="colophon" role="contentinfo">
+  <p>&copy; Copyright <script language="JavaScript">var date = new Date(); document.write(date.getFullYear());</script> by 
+    <script language="JavaScript">
+          u = 'dhunterkde';
+          s = 'gmail.com';
+          document.write('<a href=\"mailto:' + u + '@' + s + '\" target=\"_blank\">');
+    </script>
+    Manuel Gutierrez</a></p>
+  <p > Powered by <a href="http://docs.getpelican.com/en/latest/getting_started.html" target="_blank">Pelican</a>.  
+    <a href="https://github.com/xr09/twentytwelve">Theme</a> ported from <a href="http://wordpress.org/themes/twentytwelve">Wordpress</a> by <a href="http://xr09.github.io">xr09</a>
+  </p> 
+</footer>    </div>
+  </body>
+</html>

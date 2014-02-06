@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title> sed is unix | DevPad </title>
+
+    <link rel="stylesheet" href="http://xr09.github.io/TwentyTwelve/theme/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="http://xr09.github.io/TwentyTwelve/theme/css/pygments.css" type="text/css" />
+    <link rel="alternate" type="application/rss+xml" title="DevPad" href="http://xr09.github.io/TwentyTwelve/feeds/all.rss.xml">
+  </head>
+  <body class="home blog custom-font-enabled single-author">
+    <div id="page" class="hfeed site">
+<header id="masthead" class="site-header" role="banner">
+  <hgroup>
+    <h1 class="site-title"><a href="http://xr09.github.io/TwentyTwelve/" title="DevPad" rel="home">DevPad</a></h1>
+    <h2 class="site-description">clean code, good karma</h2>
+  </hgroup>
+
+<nav id="site-navigation" class="main-navigation" role="navigation">
+  <h3 class="menu-toggle">menu</h3>
+  <a class="assistive-text" href="#content" title="skip to content">skip to content</a>
+  <div class="nav-menu">
+  <ul>
+          <li><a href="http://xr09.github.io/TwentyTwelve/pages/projects.html">Projects</a> </li>
+          <li><a href="http://xr09.github.io/TwentyTwelve/archives.html">Archive</a> </li>
+          <li><a href="http://xr09.github.io/TwentyTwelve/tags.html">Tags</a> </li>
+          <li><a href="http://xr09.github.io/TwentyTwelve/pages/about.html">About</a> </li>
+  </ul>
+  </div>
+</nav>
+</header>
+
+<div class=separator></div>        
+        <div class=body>
+<div id="main" class="wrapper">
+<article class="post entry-content">
+  <header class="entry-header">
+    <h1 class="entry-title"> sed is unix</h1>
+    <p class=date> Thu 03 October 2013 </p>
+  </header>
+    
+    <p>The UNIX concept of &quot;do one thing and do it well&quot; is so beautiful it's inspiring.</p>
+<p>Back in 2005 as a beginner Linux user I used vim for everything text related, now I use it relatively less, I just found sed a while ago.</p>
+<p>For example, this is how I change my IceWm wallpaper with sed.</p>
+<div class="highlight"><pre>sed -i  <span class="s1">&#39;/jpg/ s/old_wallpaper/new_wallpaper/&#39;</span> .icewm/preferences
+</pre></div>
+<p>A rather simple task, any visual text editor could do but I find this way extremely simple and pragmatic (and scriptable).</p>
+<p>Some argue this is a waste of time, the time of text tools is over. Until they have to change a humongous 2GB text file and no editor can handle it, but sed will.</p>
+<p>Do one thing and do it well. Nice play UNIX.</p>
+
+    </article>
+    <p class=tags>This entry was tagged as
+      <a href="http://xr09.github.io/TwentyTwelve/tag/unix.html">unix</a>
+      <a href="http://xr09.github.io/TwentyTwelve/tag/sed.html">sed</a>
+    </p>
+</div> <!--#main-->
+        </div>
+        
+<footer id="colophon" role="contentinfo">
+  <p>&copy; Copyright <script language="JavaScript">var date = new Date(); document.write(date.getFullYear());</script> by 
+    <script language="JavaScript">
+          u = 'dhunterkde';
+          s = 'gmail.com';
+          document.write('<a href=\"mailto:' + u + '@' + s + '\" target=\"_blank\">');
+    </script>
+    Manuel Gutierrez</a></p>
+  <p > Powered by <a href="http://docs.getpelican.com/en/latest/getting_started.html" target="_blank">Pelican</a>.  
+    <a href="https://github.com/xr09/twentytwelve">Theme</a> ported from <a href="http://wordpress.org/themes/twentytwelve">Wordpress</a> by <a href="http://xr09.github.io">xr09</a>
+  </p> 
+</footer>    </div>
+  </body>
+</html>
