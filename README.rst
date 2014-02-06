@@ -1,7 +1,7 @@
 Twenty Twelve
 =============
 
-Pelican theme ported from Wordpress
+Pelican theme ported from Wordpress. Check it here: http://xr09.github.io/TwentyTwelve/
 
 In order to correctly use this theme you will need this variables in your pelican conf.py::
 
