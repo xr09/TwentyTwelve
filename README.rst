@@ -54,3 +54,9 @@ In order to correctly use this theme you will need this variables in your pelica
     #FILES_TO_COPY = (('extra/robots.txt', 'robots.txt'),)
 
 
+
+
+.. image:: https://d2weczhvl823v0.cloudfront.net/xr09/twentytwelve/trend.png
+   :alt: Bitdeli badge
+   :target: https://bitdeli.com/free
+
