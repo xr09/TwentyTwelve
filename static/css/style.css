@@ -115,6 +115,7 @@ hgroup,
 nav,
 section {
 	display: block;
+    font-size: 120%;
 }
 audio,
 canvas,
@@ -1398,15 +1399,6 @@ a.comment-edit-link:hover {
 	text-align: right;
 }
 
-
-/* =Plugins
------------------------------------------------ */
-
-img#wpstats {
-	display: block;
-	margin: 0 auto 24px;
-	margin: 0 auto 1.714285714rem;
-}
 
 
 /* =Media queries

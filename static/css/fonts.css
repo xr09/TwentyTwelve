@@ -3,8 +3,6 @@
   font-style: normal;
   font-weight: 400;
   src: local('Open Sans'), local('OpenSans'), url(../fonts/u-WUoqrET9fUeobQW7jkRaCWcynf_cDxXwCLxiixG1c.ttf) format('truetype');
-/*   src: local('Open Sans'), local('OpenSans'), url(http://themes.googleusercontent.com/static/fonts/opensans/v6/u
--WUoqrET9fUeobQW7jkRaCWcynf_cDxXwCLxiixG1c.ttf) format('truetype'); */
 }
 @font-face {
   font-family: 'Open Sans';
